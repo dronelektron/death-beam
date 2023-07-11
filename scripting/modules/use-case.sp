@@ -11,6 +11,10 @@ void UseCase_DrawBeam(int victim, int killer, const float end[3]) {
     Visualizer_DrawBeam(victim, start, end, color);
 }
 
+bool UseCase_IsBulletDamage(int damageType) {
+    return (damageType & DAMAGE_BULLET) == DAMAGE_BULLET;
+}
+
 bool UseCase_IsClient(int entity) {
     return 1 <= entity && entity <= MaxClients;
 }
