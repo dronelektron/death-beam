@@ -1,0 +1,17 @@
+"Phrases"
+{
+    "Death beam"
+    {
+        "en"    "Death beam"
+    }
+
+    "Enable"
+    {
+        "en"    "Enable"
+    }
+
+    "Disable"
+    {
+        "en"    "Disable"
+    }
+}
