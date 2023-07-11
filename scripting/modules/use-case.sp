@@ -1,14 +1,20 @@
-void UseCase_DrawBeam(int victim, int killer, const float end[3]) {
-    if (!Variable_PluginEnabled()) {
-        return;
+void UseCase_DrawBeam(int victim, int attacker, int damageType, const float end[3]) {
+    bool draw = true;
+
+    draw &= Variable_PluginEnabled();
+    draw &= UseCase_IsBulletDamage(damageType);
+    draw &= UseCase_IsClient(attacker);
+    draw &= Cookie_IsShowBeam(victim);
+    draw &= !IsPlayerAlive(victim);
+
+    if (draw) {
+        float start[3];
+        int color[4];
+
+        GetClientEyePosition(attacker, start);
+        Variable_BeamColor(color);
+        Visualizer_DrawBeam(victim, start, end, color);
     }
-
-    float start[3];
-    int color[4];
-
-    GetClientEyePosition(killer, start);
-    Variable_BeamColor(color);
-    Visualizer_DrawBeam(victim, start, end, color);
 }
 
 bool UseCase_IsBulletDamage(int damageType) {

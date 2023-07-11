@@ -1,14 +1,19 @@
 #include <sourcemod>
 #include <sdktools>
 #include <sdkhooks>
+#include <clientprefs>
 
 #include "db/color"
+#include "db/cookie"
 #include "db/hook"
+#include "db/menu"
 #include "db/visualizer"
 
 #include "modules/color.sp"
 #include "modules/console-variable.sp"
+#include "modules/cookie.sp"
 #include "modules/hook.sp"
+#include "modules/menu.sp"
 #include "modules/use-case.sp"
 #include "modules/visualizer.sp"
 
@@ -21,7 +26,11 @@ public Plugin myinfo = {
 };
 
 public void OnPluginStart() {
+    Cookie_Create();
     Variable_Create();
+    Menu_AddToPreferences();
+    CookieLateLoad();
+    LoadTranslations("death-beam.phrases");
 }
 
 public void OnMapStart() {
@@ -30,4 +39,20 @@ public void OnMapStart() {
 
 public void OnClientPutInServer(int client) {
     Hook_TakeDamagePost(client);
+}
+
+public void OnClientConnected(int client) {
+    Cookie_Reset(client);
+}
+
+public void OnClientCookiesCached(int client) {
+    Cookie_Load(client);
+}
+
+static void CookieLateLoad() {
+    for (int client = 1; client <= MaxClients; client++) {
+        if (AreClientCookiesCached(client)) {
+            OnClientCookiesCached(client);
+        }
+    }
 }
