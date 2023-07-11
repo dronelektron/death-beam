@@ -17,6 +17,8 @@
 #include "modules/use-case.sp"
 #include "modules/visualizer.sp"
 
+#define AUTO_CREATE_YES true
+
 public Plugin myinfo = {
     name = "Death beam",
     author = "Dron-elektron",
@@ -31,6 +33,7 @@ public void OnPluginStart() {
     Menu_AddToPreferences();
     CookieLateLoad();
     LoadTranslations("death-beam.phrases");
+    AutoExecConfig(AUTO_CREATE_YES, "death-beam");
 }
 
 public void OnMapStart() {
