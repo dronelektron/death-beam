@@ -2,8 +2,8 @@ static ConVar g_pluginEnabled;
 static ConVar g_beamColor;
 
 void Variable_Create() {
-    g_pluginEnabled = CreateConVar("sm_deathbeam_enable", "1");
-    g_beamColor = CreateConVar("sm_deathbeam_color", "255 255 255 255");
+    g_pluginEnabled = CreateConVar("sm_deathbeam_enable", "1", "Enable (1) or disable (0) plugin");
+    g_beamColor = CreateConVar("sm_deathbeam_color", "255 255 255 255", "Death beam color in RGBA format");
 }
 
 bool Variable_PluginEnabled() {
