@@ -23,7 +23,7 @@ public Plugin myinfo = {
     name = "Death beam",
     author = "Dron-elektron",
     description = "Shows the beam between killer and victim",
-    version = "0.1.0",
+    version = "1.0.0",
     url = "https://github.com/dronelektron/death-beam"
 };
 
@@ -42,10 +42,6 @@ public void OnMapStart() {
 
 public void OnClientPutInServer(int client) {
     Hook_TakeDamagePost(client);
-}
-
-public void OnClientConnected(int client) {
-    Cookie_Reset(client);
 }
 
 public void OnClientCookiesCached(int client) {

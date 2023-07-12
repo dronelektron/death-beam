@@ -16,9 +16,9 @@ void Menu_ShowBeam(int client) {
     menu.SetTitle("%T", DEATH_BEAM, client);
 
     if (Cookie_IsShowBeam(client)) {
-        Menu_ShowBeamOptions(menu, client, ITEMDRAW_DISABLED, ITEMDRAW_DEFAULT);
+        Menu_AddShowBeamItem(menu, client, COOKIE_SHOW_BEAM_NO, ITEM_ENABLED);
     } else {
-        Menu_ShowBeamOptions(menu, client, ITEMDRAW_DEFAULT, ITEMDRAW_DISABLED);
+        Menu_AddShowBeamItem(menu, client, COOKIE_SHOW_BEAM_YES, ITEM_DISABLED);
     }
 
     menu.ExitBackButton = true;
@@ -42,15 +42,11 @@ public int MenuHandler_ShowBeam(Menu menu, MenuAction action, int param1, int pa
     return 0;
 }
 
-void Menu_ShowBeamOptions(Menu menu, int client, int style1, int style2) {
-    Menu_AddShowBeamItem(menu, client, COOKIE_SHOW_BEAM_YES, ITEM_ENABLE, style1);
-    Menu_AddShowBeamItem(menu, client, COOKIE_SHOW_BEAM_NO, ITEM_DISABLE, style2);
-}
-
-void Menu_AddShowBeamItem(Menu menu, int client, const char[] info, const char[] phrase, int style) {
+void Menu_AddShowBeamItem(Menu menu, int client, const char[] info, const char[] state) {
     char item[ITEM_SIZE];
 
-    Format(item, sizeof(item), "%T", phrase, client);
+    SetGlobalTransTarget(client);
+    Format(item, sizeof(item), "%t", ITEM_BEAM_DISPLAY, state);
 
-    menu.AddItem(info, item, style);
+    menu.AddItem(info, item);
 }

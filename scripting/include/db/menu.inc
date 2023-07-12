@@ -8,5 +8,6 @@
 
 #define DEATH_BEAM "Death beam"
 
-#define ITEM_ENABLE "Enable"
-#define ITEM_DISABLE "Disable"
+#define ITEM_BEAM_DISPLAY "Beam display"
+#define ITEM_ENABLED "Enabled"
+#define ITEM_DISABLED "Disabled"

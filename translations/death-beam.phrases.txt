@@ -5,13 +5,19 @@
         "en"    "Death beam"
     }
 
-    "Enable"
+    "Beam display"
     {
-        "en"    "Enable"
+        "#format"   "{1:t}"
+        "en"    "Beam display [ {1} ]"
     }
 
-    "Disable"
+    "Enabled"
     {
-        "en"    "Disable"
+        "en"    "Enabled"
+    }
+
+    "Disabled"
+    {
+        "en"    "Disabled"
     }
 }
