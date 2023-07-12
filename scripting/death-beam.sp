@@ -44,10 +44,6 @@ public void OnClientPutInServer(int client) {
     Hook_TakeDamagePost(client);
 }
 
-public void OnClientConnected(int client) {
-    Cookie_Reset(client);
-}
-
 public void OnClientCookiesCached(int client) {
     Cookie_Load(client);
 }
