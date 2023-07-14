@@ -11,3 +11,4 @@
 #define ITEM_BEAM_DISPLAY "Beam display"
 #define ITEM_ENABLED "Enabled"
 #define ITEM_DISABLED "Disabled"
+#define ITEM_BEAM_COLOR "Beam color"

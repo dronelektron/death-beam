@@ -20,4 +20,45 @@
     {
         "en"    "Disabled"
     }
+
+    "Beam color"
+    {
+        "#format"   "{1:t}"
+        "en"    "Color [ {1} ]"
+    }
+
+    "Red"
+    {
+        "en"    "Red"
+    }
+
+    "Lime"
+    {
+        "en"    "Lime"
+    }
+
+    "Blue"
+    {
+        "en"    "Blue"
+    }
+
+    "Yellow"
+    {
+        "en"    "Yellow"
+    }
+
+    "Fuchsia"
+    {
+        "en"    "Fuchsia"
+    }
+
+    "Aqua"
+    {
+        "en"    "Aqua"
+    }
+
+    "White"
+    {
+        "en"    "White"
+    }
 }

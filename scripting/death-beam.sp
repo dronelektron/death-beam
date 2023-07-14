@@ -23,11 +23,12 @@ public Plugin myinfo = {
     name = "Death beam",
     author = "Dron-elektron",
     description = "Shows the beam between killer and victim",
-    version = "1.0.0",
+    version = "1.1.0",
     url = "https://github.com/dronelektron/death-beam"
 };
 
 public void OnPluginStart() {
+    Color_Create();
     Cookie_Create();
     Variable_Create();
     Menu_AddToPreferences();

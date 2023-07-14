@@ -1,10 +1,16 @@
-void Color_RgbaStringToArray(const char[] text, int color[4]) {
-    char parts[4][4];
+static StringMap g_colors;
 
-    ExplodeString(text, " ", parts, 4, 4);
+void Color_Create() {
+    g_colors = new StringMap();
+    g_colors.SetArray(COLOR_RED, {255, 0, 0, 255}, 4);
+    g_colors.SetArray(COLOR_LIME, {0, 255, 0, 255}, 4);
+    g_colors.SetArray(COLOR_BLUE, {0, 0, 255, 255}, 4);
+    g_colors.SetArray(COLOR_YELLOW, {255, 255, 0, 255}, 4);
+    g_colors.SetArray(COLOR_FUCHSIA, {255, 0, 255, 255}, 4);
+    g_colors.SetArray(COLOR_AQUA, {0, 255, 255, 255}, 4);
+    g_colors.SetArray(COLOR_WHITE, {255, 255, 255, 255}, 4);
+}
 
-    color[R] = StringToInt(parts[R]);
-    color[G] = StringToInt(parts[G]);
-    color[B] = StringToInt(parts[B]);
-    color[A] = StringToInt(parts[A]);
+void Color_Get(const char[] name, int color[4]) {
+    g_colors.GetArray(name, color, 4);
 }
