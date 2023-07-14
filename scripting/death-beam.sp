@@ -28,6 +28,7 @@ public Plugin myinfo = {
 };
 
 public void OnPluginStart() {
+    Color_Create();
     Cookie_Create();
     Variable_Create();
     Menu_AddToPreferences();

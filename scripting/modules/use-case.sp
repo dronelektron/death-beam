@@ -12,7 +12,7 @@ void UseCase_DrawBeam(int victim, int attacker, int damageType, const float end[
         int color[4];
 
         GetClientEyePosition(attacker, start);
-        Variable_BeamColor(color);
+        Cookie_GetBeamColor(victim, color);
         Visualizer_DrawBeam(victim, start, end, color);
     }
 }
