@@ -1,0 +1,27 @@
+"Phrases"
+{
+    "Death beam"
+    {
+        "ru"    "Луч смерти"
+    }
+
+    "Beam display"
+    {
+        "ru"    "Показ луча [ {1} ]"
+    }
+
+    "Enabled"
+    {
+        "ru"    "Включен"
+    }
+
+    "Disabled"
+    {
+        "ru"    "Выключен"
+    }
+
+    "Beam color"
+    {
+        "ru"    "Цвет [ {1} ]"
+    }
+}

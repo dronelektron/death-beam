@@ -3,13 +3,14 @@
 #include <sdkhooks>
 #include <clientprefs>
 
-#include "db/color"
+#include "db/color-storage"
 #include "db/cookie"
-#include "db/hook"
 #include "db/menu"
+#include "db/use-case"
 #include "db/visualizer"
 
-#include "modules/color.sp"
+#include "modules/color-list.sp"
+#include "modules/color-storage.sp"
 #include "modules/console-variable.sp"
 #include "modules/cookie.sp"
 #include "modules/hook.sp"
@@ -23,22 +24,28 @@ public Plugin myinfo = {
     name = "Death beam",
     author = "Dron-elektron",
     description = "Shows the beam between killer and victim",
-    version = "1.1.0",
+    version = "1.2.0",
     url = "https://github.com/dronelektron/death-beam"
 };
 
 public void OnPluginStart() {
-    Color_Create();
+    ColorList_Create();
     Cookie_Create();
     Variable_Create();
     Menu_AddToPreferences();
     CookieLateLoad();
-    LoadTranslations("death-beam.phrases");
+    LoadTranslations("death-beam-core.phrases");
+    LoadTranslations("death-beam-colors.phrases");
     AutoExecConfig(AUTO_CREATE_YES, "death-beam");
 }
 
 public void OnMapStart() {
     Visualizer_Precache();
+    ColorStorage_Load();
+}
+
+public void OnConfigsExecuted() {
+    UseCase_CheckDefaultColorName();
 }
 
 public void OnClientPutInServer(int client) {

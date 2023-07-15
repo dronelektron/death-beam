@@ -1,0 +1,37 @@
+"Phrases"
+{
+    "Red"
+    {
+        "en"    "Red"
+    }
+
+    "Lime"
+    {
+        "en"    "Lime"
+    }
+
+    "Blue"
+    {
+        "en"    "Blue"
+    }
+
+    "Yellow"
+    {
+        "en"    "Yellow"
+    }
+
+    "Fuchsia"
+    {
+        "en"    "Fuchsia"
+    }
+
+    "Aqua"
+    {
+        "en"    "Aqua"
+    }
+
+    "White"
+    {
+        "en"    "White"
+    }
+}
