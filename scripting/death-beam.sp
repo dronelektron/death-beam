@@ -33,7 +33,8 @@ public void OnPluginStart() {
     Variable_Create();
     Menu_AddToPreferences();
     CookieLateLoad();
-    LoadTranslations("death-beam.phrases");
+    LoadTranslations("death-beam-core.phrases");
+    LoadTranslations("death-beam-colors.phrases");
     AutoExecConfig(AUTO_CREATE_YES, "death-beam");
 }
 
