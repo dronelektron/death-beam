@@ -5,8 +5,8 @@
 
 #include "db/color"
 #include "db/cookie"
-#include "db/hook"
 #include "db/menu"
+#include "db/use-case"
 #include "db/visualizer"
 
 #include "modules/color.sp"
