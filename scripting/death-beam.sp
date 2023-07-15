@@ -3,13 +3,14 @@
 #include <sdkhooks>
 #include <clientprefs>
 
-#include "db/color"
+#include "db/color-storage"
 #include "db/cookie"
 #include "db/menu"
 #include "db/use-case"
 #include "db/visualizer"
 
-#include "modules/color.sp"
+#include "modules/color-list.sp"
+#include "modules/color-storage.sp"
 #include "modules/console-variable.sp"
 #include "modules/cookie.sp"
 #include "modules/hook.sp"
@@ -28,7 +29,7 @@ public Plugin myinfo = {
 };
 
 public void OnPluginStart() {
-    Color_Create();
+    ColorList_Create();
     Cookie_Create();
     Variable_Create();
     Menu_AddToPreferences();
@@ -40,6 +41,11 @@ public void OnPluginStart() {
 
 public void OnMapStart() {
     Visualizer_Precache();
+    ColorStorage_Load();
+}
+
+public void OnConfigsExecuted() {
+    UseCase_CheckDefaultColorName();
 }
 
 public void OnClientPutInServer(int client) {

@@ -50,18 +50,11 @@ public int MenuHandler_BeamSettings(Menu menu, MenuAction action, int param1, in
 
 void Menu_BeamColor(int client) {
     Menu menu = new Menu(MenuHandler_BeamColor);
-    char beamColor[COOKIE_BEAM_COLOR_SIZE];
+    char colorName[COLOR_NAME_SIZE];
 
-    Cookie_GetBeamColorName(client, beamColor);
-    Menu_SetTitle(menu, client, ITEM_BEAM_COLOR, beamColor);
-
-    Menu_AddColorItem(menu, client, COLOR_RED);
-    Menu_AddColorItem(menu, client, COLOR_LIME);
-    Menu_AddColorItem(menu, client, COLOR_BLUE);
-    Menu_AddColorItem(menu, client, COLOR_YELLOW);
-    Menu_AddColorItem(menu, client, COLOR_FUCHSIA);
-    Menu_AddColorItem(menu, client, COLOR_AQUA);
-    Menu_AddColorItem(menu, client, COLOR_WHITE);
+    Cookie_GetBeamColorName(client, colorName);
+    Menu_SetTitle(menu, client, ITEM_BEAM_COLOR, colorName);
+    Menu_AddColors(menu, client);
 
     menu.ExitBackButton = true;
     menu.Display(client, MENU_TIME_FOREVER);
@@ -103,14 +96,23 @@ void Menu_AddShowBeamItem(Menu menu, int client, const char[] info, const char[]
 }
 
 void Menu_AddBeamColorItem(Menu menu, int client) {
-    char beamColor[COOKIE_BEAM_COLOR_SIZE];
+    char colorName[COLOR_NAME_SIZE];
     char item[ITEM_SIZE];
 
-    Cookie_GetBeamColorName(client, beamColor);
+    Cookie_GetBeamColorName(client, colorName);
     SetGlobalTransTarget(client);
-    Format(item, sizeof(item), "%t", ITEM_BEAM_COLOR, beamColor);
+    Format(item, sizeof(item), "%t", ITEM_BEAM_COLOR, colorName);
 
     menu.AddItem(ITEM_BEAM_COLOR, item);
+}
+
+void Menu_AddColors(Menu menu, int client) {
+    char colorName[COLOR_NAME_SIZE];
+
+    for (int colorIndex = 0; colorIndex < ColorList_Size(); colorIndex++) {
+        ColorList_GetName(colorIndex, colorName);
+        Menu_AddColorItem(menu, client, colorName);
+    }
 }
 
 void Menu_AddColorItem(Menu menu, int client, const char[] phrase) {

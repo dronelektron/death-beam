@@ -1,3 +1,13 @@
+void UseCase_CheckDefaultColorName() {
+    char colorName[COLOR_NAME_SIZE];
+
+    Variable_ColorName(colorName);
+
+    if (!ColorList_IsColorNameExists(colorName)) {
+        SetFailState("Default color name '%s' is not found", colorName);
+    }
+}
+
 void UseCase_DrawBeam(int victim, int attacker, int damageType, const float end[3]) {
     bool draw = true;
 

@@ -26,14 +26,14 @@ static void Cookie_LoadShowBeam(int client) {
 }
 
 static void Cookie_LoadBeamColor(int client) {
-    char beamColor[COOKIE_BEAM_COLOR_SIZE];
+    char colorName[COLOR_NAME_SIZE];
 
-    GetClientCookie(client, g_beamColorCookie, beamColor, sizeof(beamColor));
+    GetClientCookie(client, g_beamColorCookie, colorName, sizeof(colorName));
 
-    if (Cookie_IsEmpty(beamColor)) {
-        Cookie_SetBeamColor(client, COLOR_WHITE);
+    if (Cookie_IsEmpty(colorName)) {
+        Cookie_SetDefaultColor(client);
     } else {
-        Cookie_UpdateBeamColor(client, beamColor);
+        Cookie_UpdateBeamColor(client, colorName);
     }
 }
 
@@ -54,19 +54,31 @@ static void Cookie_UpdateShowBeam(int client, const char[] showBeam) {
     g_showBeam[client] = StrEqual(showBeam, COOKIE_SHOW_BEAM_YES);
 }
 
-void Cookie_GetBeamColorName(int client, char[] beamColor) {
-    GetClientCookie(client, g_beamColorCookie, beamColor, COOKIE_BEAM_COLOR_SIZE);
+void Cookie_GetBeamColorName(int client, char[] colorName) {
+    GetClientCookie(client, g_beamColorCookie, colorName, COLOR_NAME_SIZE);
 }
 
 void Cookie_GetBeamColor(int client, int color[4]) {
     color = g_beamColor[client];
 }
 
-void Cookie_SetBeamColor(int client, const char[] beamColor) {
-    SetClientCookie(client, g_beamColorCookie, beamColor);
-    Cookie_UpdateBeamColor(client, beamColor);
+void Cookie_SetBeamColor(int client, const char[] colorName) {
+    SetClientCookie(client, g_beamColorCookie, colorName);
+    Cookie_UpdateBeamColor(client, colorName);
 }
 
-static void Cookie_UpdateBeamColor(int client, const char[] beamColor) {
-    Color_Get(beamColor, g_beamColor[client]);
+static void Cookie_UpdateBeamColor(int client, const char[] colorName) {
+    bool colorExists = ColorList_Get(colorName, g_beamColor[client]);
+
+    if (!colorExists) {
+        Cookie_SetDefaultColor(client);
+        LogError("Color '%s' is not found for player \"%L\"", colorName, client);
+    }
+}
+
+static void Cookie_SetDefaultColor(int client) {
+    char colorName[COLOR_NAME_SIZE];
+
+    Variable_ColorName(colorName);
+    Cookie_SetBeamColor(client, colorName);
 }
