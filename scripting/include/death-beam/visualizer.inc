@@ -1,7 +1,7 @@
-#if defined _db_visualizer_included
+#if defined _death_beam_visualizer_included
  #endinput
 #endif
-#define _db_visualizer_included
+#define _death_beam_visualizer_included
 
 #define BEAM_START_FRAME 0
 #define BEAM_FRAME_RATE 0
