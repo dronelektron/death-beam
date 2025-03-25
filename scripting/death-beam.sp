@@ -3,11 +3,11 @@
 #include <sdkhooks>
 #include <clientprefs>
 
-#include "db/color-storage"
-#include "db/cookie"
-#include "db/menu"
-#include "db/use-case"
-#include "db/visualizer"
+#include "death-beam/color-storage"
+#include "death-beam/cookie"
+#include "death-beam/menu"
+#include "death-beam/use-case"
+#include "death-beam/visualizer"
 
 #include "modules/color-list.sp"
 #include "modules/color-storage.sp"
