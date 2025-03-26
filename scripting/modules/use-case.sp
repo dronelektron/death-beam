@@ -3,7 +3,7 @@ void UseCase_CheckDefaultColorName() {
 
     Variable_ColorName(colorName);
 
-    if (!ColorList_IsColorNameExists(colorName)) {
+    if (!ColorList_Exists(colorName)) {
         SetFailState("Default color name '%s' is not found", colorName);
     }
 }
