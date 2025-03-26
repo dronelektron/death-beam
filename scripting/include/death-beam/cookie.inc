@@ -1,7 +1,7 @@
-#if defined _db_cookie_included
+#if defined _death_beam_cookie_included
  #endinput
 #endif
-#define _db_cookie_included
+#define _death_beam_cookie_included
 
 #define NULL_CHARACTER '\0'
 

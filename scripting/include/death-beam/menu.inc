@@ -1,7 +1,7 @@
-#if defined _db_menu_included
+#if defined _death_beam_menu_included
  #endinput
 #endif
-#define _db_menu_included
+#define _death_beam_menu_included
 
 #define INFO_SIZE 32
 #define ITEM_SIZE 128
