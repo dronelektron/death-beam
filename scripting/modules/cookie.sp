@@ -13,6 +13,14 @@ void Cookie_Load(int client) {
     Cookie_LoadBeamColor(client);
 }
 
+void Cookie_LateLoad() {
+    for (int client = 1; client <= MaxClients; client++) {
+        if (AreClientCookiesCached(client)) {
+            OnClientCookiesCached(client);
+        }
+    }
+}
+
 static void Cookie_LoadShowBeam(int client) {
     char showBeam[COOKIE_SHOW_BEAM_SIZE];
 

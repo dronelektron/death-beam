@@ -8,29 +8,30 @@ void UseCase_CheckDefaultColorName() {
     }
 }
 
-void UseCase_DrawBeam(int victim, int attacker, int damageType, const float end[3]) {
-    bool draw = true;
-
-    draw &= Variable_PluginEnabled();
-    draw &= UseCase_IsBulletDamage(damageType);
-    draw &= UseCase_IsClient(attacker);
-    draw &= Cookie_IsShowBeam(victim);
-    draw &= !IsPlayerAlive(victim);
-
-    if (draw) {
-        float start[3];
-        int color[4];
-
-        GetClientEyePosition(attacker, start);
-        Cookie_GetBeamColor(victim, color);
-        Visualizer_DrawBeam(victim, start, end, color);
+void UseCase_OnPlayerDeath(int victim, int attacker, const char[] weapon) {
+    if (!Cookie_IsShowBeam(victim) || IsEntity(attacker) || WeaponFilter_IsBad(weapon)) {
+        return;
     }
+
+    float origin[3];
+    float target[3];
+    float angles[3];
+    float direction[3];
+    int color[4];
+
+    GetClientEyePosition(attacker, origin);
+    GetClientEyePosition(victim, target);
+    GetClientEyeAngles(attacker, angles);
+
+    float distance = GetVectorDistance(origin, target);
+
+    GetAngleVectors(angles, direction, NULL_VECTOR, NULL_VECTOR);
+    ScaleVector(direction, distance);
+    AddVectors(origin, direction, target);
+    Cookie_GetBeamColor(victim, color);
+    Visualizer_DrawBeam(victim, origin, target, color);
 }
 
-bool UseCase_IsBulletDamage(int damageType) {
-    return (damageType & DAMAGE_BULLET) == DAMAGE_BULLET;
-}
-
-bool UseCase_IsClient(int entity) {
-    return 1 <= entity && entity <= MaxClients;
+static bool IsEntity(int entity) {
+    return entity < 1 || entity > MaxClients;
 }
