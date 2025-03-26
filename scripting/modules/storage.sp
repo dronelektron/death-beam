@@ -1,4 +1,4 @@
-void ColorStorage_Load() {
+void Storage_LoadColors() {
     ColorList_Clear();
 
     char colorsPath[PLATFORM_MAX_PATH];

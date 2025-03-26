@@ -2,17 +2,17 @@
 #include <sdktools>
 #include <clientprefs>
 
-#include "death-beam/color-storage"
 #include "death-beam/cookie"
 #include "death-beam/menu"
+#include "death-beam/storage"
 #include "death-beam/visualizer"
 #include "death-beam/weapon-filter"
 
 #include "modules/color-list.sp"
-#include "modules/color-storage.sp"
 #include "modules/console-variable.sp"
 #include "modules/cookie.sp"
 #include "modules/event.sp"
+#include "modules/storage.sp"
 #include "modules/menu.sp"
 #include "modules/use-case.sp"
 #include "modules/visualizer.sp"
@@ -41,7 +41,7 @@ public void OnPluginStart() {
 
 public void OnMapStart() {
     Visualizer_Precache();
-    ColorStorage_Load();
+    Storage_LoadColors();
 }
 
 public void OnConfigsExecuted() {
