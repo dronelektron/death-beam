@@ -1,23 +1,36 @@
+static char g_configPath[PLATFORM_MAX_PATH];
+
+void Storage_BuildPath() {
+    BuildPath(Path_SM, g_configPath, sizeof(g_configPath), CONFIG_PATH);
+}
+
 void Storage_LoadColors() {
-    ColorList_Clear();
+    KeyValues kv = GetKeyValues();
 
-    char colorsPath[PLATFORM_MAX_PATH];
+    LoadColors(kv);
+    CloseHandle(kv);
+}
 
-    BuildPath(Path_SM, colorsPath, sizeof(colorsPath), COLORS_PATH);
-
-    if (!FileExists(colorsPath)) {
-        SetFailState("Config file '%s' is not found", colorsPath);
+static KeyValues GetKeyValues() {
+    if (!FileExists(g_configPath)) {
+        SetFailState("Unable to load the '%s' config file", g_configPath);
     }
 
-    KeyValues kv = new KeyValues("Colors");
+    KeyValues kv = new KeyValues(SECTION_COLORS);
 
-    kv.ImportFromFile(colorsPath);
+    kv.ImportFromFile(g_configPath);
 
+    return kv;
+}
+
+static void LoadColors(KeyValues kv) {
     if (!kv.GotoFirstSubKey(KEY_ONLY_NO)) {
-        delete kv;
+        SetFailState("The '%s' section is empty", SECTION_COLORS);
 
         return;
     }
+
+    ColorList_Clear();
 
     char colorName[COLOR_NAME_SIZE];
     int color[4];
@@ -28,8 +41,6 @@ void Storage_LoadColors() {
 
         ColorList_Add(colorName, color);
     } while (kv.GotoNextKey(KEY_ONLY_NO));
-
-    delete kv;
 
     ColorList_UpdateSnapshot();
 }

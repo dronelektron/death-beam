@@ -33,6 +33,7 @@ public void OnPluginStart() {
     Cookie_LateLoad();
     Event_Create();
     Menu_AddToPreferences();
+    Storage_BuildPath();
     WeaponFilter_Create();
     LoadTranslations("death-beam-core.phrases");
     LoadTranslations("death-beam-colors.phrases");
