@@ -9,8 +9,8 @@ void Cookie_Create() {
 }
 
 void Cookie_Load(int client) {
-    Cookie_LoadShowBeam(client);
-    Cookie_LoadBeamColor(client);
+    LoadShowBeam(client);
+    LoadBeamColor(client);
 }
 
 void Cookie_LateLoad() {
@@ -21,31 +21,31 @@ void Cookie_LateLoad() {
     }
 }
 
-static void Cookie_LoadShowBeam(int client) {
+static void LoadShowBeam(int client) {
     char showBeam[COOKIE_SHOW_BEAM_SIZE];
 
     GetClientCookie(client, g_showBeamCookie, showBeam, sizeof(showBeam));
 
-    if (Cookie_IsEmpty(showBeam)) {
+    if (IsEmpty(showBeam)) {
         Cookie_SetShowBeam(client, COOKIE_SHOW_BEAM_YES);
     } else {
-        Cookie_UpdateShowBeam(client, showBeam);
+        UpdateShowBeam(client, showBeam);
     }
 }
 
-static void Cookie_LoadBeamColor(int client) {
+static void LoadBeamColor(int client) {
     char colorName[COLOR_NAME_SIZE];
 
     GetClientCookie(client, g_beamColorCookie, colorName, sizeof(colorName));
 
-    if (Cookie_IsEmpty(colorName)) {
-        Cookie_SetDefaultColor(client);
+    if (IsEmpty(colorName)) {
+        SetDefaultColor(client);
     } else {
-        Cookie_UpdateBeamColor(client, colorName);
+        UpdateBeamColor(client, colorName);
     }
 }
 
-static bool Cookie_IsEmpty(const char[] value) {
+static bool IsEmpty(const char[] value) {
     return value[0] == NULL_CHARACTER;
 }
 
@@ -55,10 +55,10 @@ bool Cookie_IsShowBeam(int client) {
 
 void Cookie_SetShowBeam(int client, const char[] showBeam) {
     SetClientCookie(client, g_showBeamCookie, showBeam);
-    Cookie_UpdateShowBeam(client, showBeam);
+    UpdateShowBeam(client, showBeam);
 }
 
-static void Cookie_UpdateShowBeam(int client, const char[] showBeam) {
+static void UpdateShowBeam(int client, const char[] showBeam) {
     g_showBeam[client] = StrEqual(showBeam, COOKIE_SHOW_BEAM_YES);
 }
 
@@ -72,19 +72,19 @@ void Cookie_GetBeamColor(int client, int color[4]) {
 
 void Cookie_SetBeamColor(int client, const char[] colorName) {
     SetClientCookie(client, g_beamColorCookie, colorName);
-    Cookie_UpdateBeamColor(client, colorName);
+    UpdateBeamColor(client, colorName);
 }
 
-static void Cookie_UpdateBeamColor(int client, const char[] colorName) {
+static void UpdateBeamColor(int client, const char[] colorName) {
     bool colorExists = ColorList_Get(colorName, g_beamColor[client]);
 
     if (!colorExists) {
-        Cookie_SetDefaultColor(client);
+        SetDefaultColor(client);
         LogError("Color '%s' is not found for player \"%L\"", colorName, client);
     }
 }
 
-static void Cookie_SetDefaultColor(int client) {
+static void SetDefaultColor(int client) {
     char colorName[COLOR_NAME_SIZE];
 
     Variable_ColorName(colorName);
